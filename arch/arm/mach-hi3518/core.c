@@ -419,6 +419,8 @@ static struct pl061_platform_data gpio11_plat_data = {
 
 HIL_AMBA_DEVICE(uart0,  "uart:0",     UART0,  NULL);
 HIL_AMBA_DEVICE(uart1,  "uart:1",     UART1,  NULL);
+HIL_AMBA_DEVICE(uart1,  "uart:2",     UART2,  NULL);
+
 #if defined(CONFIG_ARM_SP805_WATCHDOG) || defined(CONFIG_ARM_SP805_WATCHDOG_MODULE)
 HIL_AMBA_DEVICE(wdog,   "dev:wdog",   WDG,    NULL);
 #endif
@@ -440,6 +442,7 @@ HIL_AMBA_DEVICE(gpio11, "dev:gpio11", GPIO11, &gpio11_plat_data);
 static struct amba_device *amba_devs[] __initdata = {
 	&HIL_AMBADEV_NAME(uart0),
 	&HIL_AMBADEV_NAME(uart1),
+	&HIL_AMBADEV_NAME(uart2),
 #if defined(CONFIG_ARM_SP805_WATCHDOG) || defined(CONFIG_ARM_SP805_WATCHDOG_MODULE)
 	&HIL_AMBADEV_NAME(wdog),
 #endif
@@ -485,6 +488,10 @@ static struct clk_lookup lookups[] = {
 	},
 	{       /* UART1 */
 		.dev_id         = "uart:1",
+		.clk            = &uart_clk,
+	},
+	{       /* UART2 */
+		.dev_id         = "uart:2",
 		.clk            = &uart_clk,
 	},
 #if defined(CONFIG_ARM_SP805_WATCHDOG) || defined(CONFIG_ARM_SP805_WATCHDOG_MODULE)
